@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { Link } from 'react-router-dom';
+import { Context } from '../store/appContext';
 
 const Contact = ({ person }) => {
-    console.log(person)
+    const {actions}= useContext(Context);
   return (
     <div className='container'>
         <div className='row'>
@@ -16,7 +18,9 @@ const Contact = ({ person }) => {
                 <p><i className="bi bi-envelope"></i>{person.email}</p>
             </div>
             <div className='col-2'>
-
+           <Link to ="/editContact"><i className="bi bi-pen" onClick={()=>{
+            actions.editPerson(person.id);
+           }} ></i></Link> 
             </div>
         </div>
         
