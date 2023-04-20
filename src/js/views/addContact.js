@@ -47,6 +47,7 @@ const AddContact = () => {
       [name]: value,
       ["agenda_slug"]: "my_super_pepe_agenda",
     });
+    setSuccessMsg("");
   };
 
   return (
