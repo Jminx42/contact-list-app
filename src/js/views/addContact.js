@@ -10,30 +10,39 @@ const AddContact = () => {
     address: "",
   });
   const [successMsg, setSuccessMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const createContact = async (newContact) => {
-    const response = await fetch(
-      "https://assets.breatheco.de/apis/fake/contact/",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newContact),
+    try {
+      const response = await fetch(
+        "https://assets.breatheco.de/apis/fake/contact/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newContact),
+        }
+      );
+
+      if (response.ok) {
+        setSuccessMsg("Contact successfully added.");
+        setNewContact({});
+      } else {
+        let responseText = JSON.parse(await response.text());
+        console.log(
+          `HTTP error! Status: ${response.status}, Message: ${responseText.msg}`
+        );
+        throw new Error(`${responseText.msg}`);
       }
-    );
 
-    if (response.ok) {
-      setSuccessMsg("Contact successfully added.");
-      setNewContact({});
-    } else {
-      setSuccessMsg("");
+      setFormInput({
+        full_name: "",
+        email: "",
+        phone: "",
+        address: "",
+      });
+    } catch (error) {
+      setErrorMsg(error.message);
     }
-
-    setFormInput({
-      full_name: "",
-      email: "",
-      phone: "",
-      address: "",
-    });
   };
 
   const handleInputChange = (event) => {
@@ -123,10 +132,16 @@ const AddContact = () => {
           </button>
         </div>
       </form>
-      {successMsg && (
+      {successMsg ? (
         <div className="alert alert-success mt-3" role="alert">
           {successMsg}
         </div>
+      ) : (
+        errorMsg && (
+          <div className="alert alert-danger mt-3" role="alert">
+            {errorMsg}
+          </div>
+        )
       )}
 
       <Link to="/">or get back to contacts</Link>
