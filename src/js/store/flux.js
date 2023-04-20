@@ -14,14 +14,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ contacts: data });
       },
 
-      createContact: async () => {
-        const response = await fetch("");
-      },
+      getPerson: async (id) => {
+        const response = await fetch(
+          "https://assets.breatheco.de/apis/fake/contact/" + id
+        );
+        const data = await response.json();
+        setStore({ person: data });
 
-      getPerson: (id) => {
-        const contacts = getStore().contacts;
-        const personFound = contacts.find((contact) => contact.id === id);
-        setStore({ person: personFound });
+        // const contacts = getStore().contacts;
+        // const personFound = contacts.find((contact) => contact.id === id);
+        // setStore({ person: personFound });
       },
 
       sendEditedPerson: () => {},
