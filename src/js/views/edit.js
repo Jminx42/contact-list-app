@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 
 const Edit = () => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
 
   // const  personA =store.person;
   console.log(store.person);

@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       editedPerson: [],
     },
     actions: {
-      getContacts: async () => {
+      updateContacts: async () => {
         const response = await fetch(
           "https://assets.breatheco.de/apis/fake/contact/agenda/my_super_pepe_agenda"
         );

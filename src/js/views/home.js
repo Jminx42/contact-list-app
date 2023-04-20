@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Contact from "../component/contact";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+
+  useEffect(() => {
+    actions.updateContacts();
+  }, []);
 
   return (
     <div className="container mt-5">
