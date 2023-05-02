@@ -7,7 +7,6 @@ const Edit = () => {
   const { store } = useContext(Context);
 
   // const  personA =store.person;
-  console.log(store.person);
 
   return (
     <div className="container">
@@ -15,7 +14,10 @@ const Edit = () => {
       <form className="row g-3">
         <div className="col-md-12">
           <label htmlFor="inputName" className="form-label">
-            Full name: {store.person.full_name}
+            Full name:{" "}
+            <span className="badge text-bg-primary">
+              {store.person.full_name}
+            </span>
           </label>
           <input
             type="text"
