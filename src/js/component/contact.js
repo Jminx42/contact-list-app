@@ -42,7 +42,7 @@ const Contact = ({ person }) => {
         </div>
         <div className="col-2">
           <Link to={`/editContact/${person.id}`}>
-            <button className="btn btn-outline-primary m-1">
+            <button className="btn btn-outline-primary m-1" id={person.id}>
               <i className="bi bi-pen"></i>
             </button>
           </Link>
