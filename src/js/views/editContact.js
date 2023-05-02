@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 
-const Edit = () => {
+const EditContact = () => {
   const { store } = useContext(Context);
+  const params = useParams();
 
   // const  personA =store.person;
   console.log(store.person);
@@ -69,4 +70,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default EditContact;
