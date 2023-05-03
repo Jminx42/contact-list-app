@@ -127,7 +127,7 @@ const AddContact = () => {
         </div>
 
         <div className="col-12 pt-3">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-success">
             Create contact
           </button>
         </div>

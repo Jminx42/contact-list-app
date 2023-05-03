@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 
 const EditContact = () => {
+  
   const { store } = useContext(Context);
   const params = useParams();
   const [editContact, setEditContact] = useState({});
@@ -13,20 +14,20 @@ const EditContact = () => {
   
   useEffect(() => {
     getContactToEdit();
-    console.log(editContact);
+    
   }, []);
 
   const getContactToEdit = async () => {
     const response = await fetch(
-      "https://assets.breatheco.de/apis/fake/contact/" + params.id
+      "https://assets.breatheco.de/apis/fake/contact/" + params.theid
     );
     const data = await response.json();
     setEditContact(data);
+  };
 
-  }
   const updateContact = async () => {
     const response = await fetch(
-      "https://assets.breatheco.de/apis/fake/contact/",
+      "https://assets.breatheco.de/apis/fake/contact/" + params.theid,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -35,7 +36,7 @@ const EditContact = () => {
     );
 
     if (response.ok) {
-      setSuccessMsg("Contact successfully added.");
+      setSuccessMsg("Contact successfully edited.");
       setEditContact({});
     } else {
       setSuccessMsg("");
@@ -45,9 +46,13 @@ const EditContact = () => {
   
 
   return (
-    <div className="container">
-      <h1 className="text-center">Edit contact with id: {params.id}</h1>
-      <form className="row g-3">
+    <div className="container p-4">
+      <h1 className="text-center">Edit contact with ID: {params.theid}</h1>
+      <form className="row g-3"
+      onSubmit={(event) => {
+        event.preventDefault();
+        updateContact();
+      }}>
         <div className="col-md-12">
           <label htmlFor="inputName" className="form-label">
             Full name: 
@@ -57,7 +62,8 @@ const EditContact = () => {
             className="form-control"
             id="inputName"
             value={editContact.full_name}
-            onChange={(e) => setEditContact({...editContact, full_name: e.target.value})}
+            onChange={(e) => {setEditContact({...editContact, full_name: e.target.value});
+            setSuccessMsg("");}}
           />
         </div>
         <div className="col-md-12">
@@ -68,7 +74,9 @@ const EditContact = () => {
             type="email"
             className="form-control"
             id="inputEmail"
-            placeholder="Edit email"
+            value={editContact.email}
+            onChange={(e) => {setEditContact({...editContact, email: e.target.value});
+            setSuccessMsg("");}}
           />
         </div>
         <div className="col-12">
@@ -79,7 +87,9 @@ const EditContact = () => {
             type="tel"
             className="form-control"
             id="inputNumber"
-            placeholder="Edit phone number"
+            value={editContact.phone}
+            onChange={(e) => {setEditContact({...editContact, phone: e.target.value});
+            setSuccessMsg("");}}
           />
         </div>
         <div className="col-12">
@@ -90,16 +100,25 @@ const EditContact = () => {
             type="text"
             className="form-control"
             id="inputAddress"
-            placeholder="Edit address"
+            value={editContact.address}
+            onChange={(e) => {setEditContact({...editContact, address: e.target.value});
+            setSuccessMsg("");}}
+
           />
         </div>
 
         <div className="col-12">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-warning">
             Save edit
           </button>
         </div>
       </form>
+      {successMsg && (
+        <div className="alert alert-success mt-3" role="alert">
+          {successMsg}
+        </div>
+      )}
+
       <Link to="/">or get back to contacts</Link>
     </div>
   );

@@ -15,7 +15,7 @@ export const Home = () => {
       <div className="row justify-content-end">
         <div className="col-auto m-3">
           <Link to="/addcontact">
-            <button className="btn btn-primary">Add new contact</button>
+            <button className="btn btn-success">Add new contact</button>
           </Link>
         </div>
       </div>
