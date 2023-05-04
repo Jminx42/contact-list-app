@@ -2,8 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       contacts: [],
-      person: [],
-      editedPerson: [],
+      
     },
     actions: {
       updateContacts: async () => {
@@ -14,19 +13,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ contacts: data });
       },
 
-      getPerson: async (id) => {
-        const response = await fetch(
-          "https://assets.breatheco.de/apis/fake/contact/" + id
-        );
-        const data = await response.json();
-        setStore({ person: data });
+      
 
-        // const contacts = getStore().contacts;
-        // const personFound = contacts.find((contact) => contact.id === id);
-        // setStore({ person: personFound });
-      },
-
-      sendEditedPerson: () => {},
+     
     },
   };
 };

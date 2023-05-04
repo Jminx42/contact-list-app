@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const AddContact = () => {
-  const [newContact, setNewContact] = useState({});
-  const [formInput, setFormInput] = useState({
+  const [newContact, setNewContact] = useState({
     full_name: "",
     email: "",
     phone: "",
     address: "",
+    agenda_slug: "my_super_pepe_agenda",
   });
+
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -39,25 +40,14 @@ const AddContact = () => {
         email: "",
         phone: "",
         address: "",
+
       });
     } catch (error) {
       setErrorMsg(error.message);
     }
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormInput({
-      ...formInput,
-      [name]: value,
-    });
-    setNewContact({
-      ...newContact,
-      [name]: value,
-      ["agenda_slug"]: "my_super_pepe_agenda",
-    });
-    setSuccessMsg("");
-  };
+
 
   return (
     <div className="container p-4">
@@ -66,7 +56,7 @@ const AddContact = () => {
         className="row g-3"
         onSubmit={(event) => {
           event.preventDefault();
-          createContact(newContact);
+          createContact();
         }}
       >
         <div className="col-md-12">
@@ -78,9 +68,12 @@ const AddContact = () => {
             className="form-control"
             name="full_name"
             id="inputName"
-            value={formInput.full_name}
+            value={newContact.full_name}
             placeholder="Enter name"
-            onChange={handleInputChange}
+            onChange={(e) => {
+              setNewContact({ ...newContact, full_name: e.target.value });
+              setSuccessMsg("");
+            }}
           />
         </div>
         <div className="col-md-12">
@@ -92,9 +85,12 @@ const AddContact = () => {
             className="form-control"
             name="email"
             id="inputEmail"
-            value={formInput.email}
+            value={newContact.email}
             placeholder="Enter email"
-            onChange={handleInputChange}
+            onChange={(e) => {
+              setNewContact({ ...newContact, email: e.target.value });
+              setSuccessMsg("");
+            }}
           />
         </div>
         <div className="col-12">
@@ -106,9 +102,12 @@ const AddContact = () => {
             className="form-control"
             name="phone"
             id="inputNumber"
-            value={formInput.phone}
+            value={newContact.phone}
             placeholder="Enter phone number"
-            onChange={handleInputChange}
+            onChange={(e) => {
+              setNewContact({ ...newContact, phone: e.target.value });
+              setSuccessMsg("");
+            }}
           />
         </div>
         <div className="col-12">
@@ -120,14 +119,17 @@ const AddContact = () => {
             className="form-control"
             name="address"
             id="inputAddress"
-            value={formInput.address}
+            value={newContact.address}
             placeholder="Enter address"
-            onChange={handleInputChange}
+            onChange={(e) => {
+              setNewContact({ ...newContact, address: e.target.value });
+              setSuccessMsg("");
+            }}
           />
         </div>
 
         <div className="col-12 pt-3">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-success">
             Create contact
           </button>
         </div>
