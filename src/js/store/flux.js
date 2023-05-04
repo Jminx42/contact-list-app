@@ -1,4 +1,4 @@
-const getState = ({ getStore, getActions, setStore }) => {
+const getState = ({ setStore }) => {
   return {
     store: {
       contacts: [],

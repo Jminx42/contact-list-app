@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const Contact = ({ person }) => {
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
 
   const deleteContact = async (contactId) => {
     const response = await fetch(

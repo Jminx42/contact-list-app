@@ -1,11 +1,8 @@
 import React, { useState, useEffect} from "react";
 import { Link, useParams } from "react-router-dom";
-import { useContext } from "react";
-import { Context } from "../store/appContext";
 
 const EditContact = () => {
   
-  const { store } = useContext(Context);
   const params = useParams();
   const [editContact, setEditContact] = useState({});
 

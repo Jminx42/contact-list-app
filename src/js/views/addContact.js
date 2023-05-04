@@ -15,6 +15,7 @@ const AddContact = () => {
 
   const createContact = async (newContact) => {
     try {
+      console.log(newContact);
       const response = await fetch(
         "https://assets.breatheco.de/apis/fake/contact/",
         {
@@ -24,16 +25,16 @@ const AddContact = () => {
         }
       );
 
-      if (response.ok) {
-        setSuccessMsg("Contact successfully added.");
-        setNewContact({});
-      } else {
-        let responseText = JSON.parse(await response.text());
-        console.log(
-          `HTTP error! Status: ${response.status}, Message: ${responseText.msg}`
-        );
-        throw new Error(`${responseText.msg}`);
-      }
+      // if (response.ok) {
+      //   setSuccessMsg("Contact successfully added.");
+      //   setNewContact({});
+      // } else {
+      //   let responseText = JSON.parse(await response.text());
+      //   console.log(
+      //     `HTTP error! Status: ${response.status}, Message: ${responseText.msg}`
+      //   );
+      //   throw new Error(`${responseText.msg}`);
+      // }
 
       setFormInput({
         full_name: "",
